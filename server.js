@@ -7,6 +7,10 @@ import {
 } from "./controllers/LecturerController.js";
 import LecturerRoutes from "./routes/LecturerRoutes.js";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -17,7 +21,7 @@ app.listen(3000, () => {
   console.log("server started at port 3000");
 });
 mongoose
-  .connect("mongodb://localhost:27017/MMS")
+  .connect(process.env.DATABASE_URL)
   .then(() => {
     console.log("Connected to database");
   })
