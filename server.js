@@ -1,11 +1,13 @@
 import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
+
 import {
   getAllLecturers,
   newLecturer,
 } from "./controllers/LecturerController.js";
 import LecturerRoutes from "./routes/LecturerRoutes.js";
+import ModuleRoutes from "./routes/ModuleRoutes.js";
 
 import dotenv from "dotenv";
 
@@ -16,12 +18,13 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use("/lecturer", LecturerRoutes);
+app.use("/module", ModuleRoutes);
 
 app.listen(3000, () => {
   console.log("server started at port 3000");
 });
 mongoose
-  .connect(process.env.DATABASE_URL)
+  .connect(process.env.DB)
   .then(() => {
     console.log("Connected to database");
   })
