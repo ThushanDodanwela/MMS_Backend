@@ -19,7 +19,7 @@ export const newLecturer = async (req, res) => {
   const { name, position, email } = req.body;
 
   try {
-    const lecturer = Lecturers.create({ name, position, email });
+    const lecturer = await Lecturers.create({ name, position, email });
     res.status(200).json({
       message: "success",
       lecturer,

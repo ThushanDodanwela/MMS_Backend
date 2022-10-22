@@ -5,14 +5,13 @@ import {
   getAllLecturers,
   newLecturer,
 } from "./controllers/LecturerController.js";
+import LecturerRoutes from "./routes/LecturerRoutes.js";
 
 const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/lecturers", getAllLecturers);
-
-app.post("/new-lecturer", newLecturer);
+app.use("/lecturer", LecturerRoutes);
 
 app.listen(3000, () => {
   console.log("server started at port 3000");
