@@ -1,8 +1,8 @@
-import Modules from "../models/Modules.js";
+import Module from "../models/Module.js";
 
 export const getAllModules = async (req, res) => {
   try {
-    const modules = await Modules.find();
+    const modules = await Module.find();
     res.status(200).json({
       message: "success",
       modules,
@@ -19,7 +19,7 @@ export const newModule = async (req, res) => {
   const { moduleCode, moduleName, level, credits, semester } = req.body;
 
   try {
-    const modules = await Modules.create({
+    const modules = await Module.create({
       moduleCode,
       moduleName,
       level,

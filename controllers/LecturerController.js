@@ -1,8 +1,8 @@
-import Lecturers from "../models/Lecturers.js";
+import Lecturer from "../models/Lecturer.js";
 
 export const getAllLecturers = async (req, res) => {
   try {
-    const lecturers = await Lecturers.find();
+    const lecturers = await Lecturer.find();
     res.status(200).json({
       message: "success",
       lecturers,
@@ -19,7 +19,7 @@ export const newLecturer = async (req, res) => {
   const { name, position, email } = req.body;
 
   try {
-    const lecturer = await Lecturers.create({ name, position, email });
+    const lecturer = await Lecturer.create({ name, position, email });
     res.status(200).json({
       message: "success",
       lecturer,

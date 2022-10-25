@@ -8,6 +8,7 @@ import {
 } from "./controllers/LecturerController.js";
 import LecturerRoutes from "./routes/LecturerRoutes.js";
 import ModuleRoutes from "./routes/ModuleRoutes.js";
+import AllocationRoutes from "./routes/AllocationRoutes.js";
 
 import dotenv from "dotenv";
 
@@ -19,10 +20,12 @@ app.use(bodyParser.json());
 
 app.use("/lecturer", LecturerRoutes);
 app.use("/module", ModuleRoutes);
+app.use("/allocations", AllocationRoutes);
 
 app.listen(3000, () => {
   console.log("server started at port 3000");
 });
+
 mongoose
   .connect(process.env.DB)
   .then(() => {
