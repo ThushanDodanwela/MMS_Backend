@@ -18,6 +18,16 @@ const LecturerSchema = new Schema({
     trim: true,
     required: true,
   },
+  phoneNumber: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  qualifications: {
+    type: String,
+    trim: true,
+    required: true,
+  },
 });
 
 export default mongoose.model("Lecturer", LecturerSchema);

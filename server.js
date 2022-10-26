@@ -1,7 +1,7 @@
 import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
-
+import cors from "cors";
 import {
   getAllLecturers,
   newLecturer,
@@ -16,14 +16,15 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/lecturer", LecturerRoutes);
 app.use("/module", ModuleRoutes);
 app.use("/allocations", AllocationRoutes);
 
-app.listen(3000, () => {
-  console.log("server started at port 3000");
+app.listen(9000, () => {
+  console.log("server started at port 9000");
 });
 
 mongoose

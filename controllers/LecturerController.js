@@ -16,10 +16,16 @@ export const getAllLecturers = async (req, res) => {
 };
 
 export const newLecturer = async (req, res) => {
-  const { name, position, email } = req.body;
+  const { name, position, email, phoneNumber, qualifications } = req.body;
 
   try {
-    const lecturer = await Lecturer.create({ name, position, email });
+    const lecturer = await Lecturer.create({
+      name,
+      position,
+      email,
+      phoneNumber,
+      qualifications,
+    });
     res.status(200).json({
       message: "success",
       lecturer,
