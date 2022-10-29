@@ -39,6 +39,20 @@ export const newLecturer = async (req, res) => {
   }
 };
 
+export const deleteAllLecturers = async (req, res) => {
+  try {
+    const lecturers = await Lecturer.deleteMany({});
+    res.status(200).json({
+      message: "all lecturers removed",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error removing lecturers",
+      error,
+    });
+  }
+};
+
 export const updateLecturer = async (req, res) => {
   const { _id, name, position, email, phoneNumber, qualifications } = req.body;
 

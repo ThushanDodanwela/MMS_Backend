@@ -15,6 +15,20 @@ export const getAllModules = async (req, res) => {
   }
 };
 
+export const deleteAllModules = async (req, res) => {
+  try {
+    const modules = await Module.deleteMany({});
+    res.status(200).json({
+      message: "all modules removed",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error removing modules",
+      error,
+    });
+  }
+};
+
 export const newModule = async (req, res) => {
   const { moduleCode, moduleName, level, credits, semester } = req.body;
 

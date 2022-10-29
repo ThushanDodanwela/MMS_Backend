@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteAllLecturers,
   getAllLecturers,
   newLecturer,
   updateLecturer,
@@ -8,6 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/get-all", getAllLecturers);
+router.post("/delete-all", deleteAllLecturers);
 router.post("/new-lecturer", newLecturer);
 router.post("/update-lecturer", updateLecturer);
 

@@ -20,6 +20,11 @@ const AllocationSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Module",
   },
+  batch: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   state: [
     {
       name: {
@@ -38,6 +43,12 @@ const AllocationSchema = new Schema({
     type: mongoose.Types.ObjectId,
     ref: "Lecturer",
   },
+  demonstrators: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Lecturer",
+    },
+  ],
 });
 
 export default mongoose.model("Allocation", AllocationSchema);
