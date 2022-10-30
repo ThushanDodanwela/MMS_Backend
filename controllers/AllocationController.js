@@ -17,6 +17,25 @@ export const getAllAllocations = async (req, res) => {
   }
 };
 
+export const getAllocationsByLecturer = async (req, res) => {
+  const { lecturerId } = req.body;
+
+  try {
+    const allocations = await Allocation.find({
+      "lecturers.lecturer": { _id: lecturerId },
+    }).populate("lecturers.lecturer module secondExaminar demonstrators");
+    res.status(200).json({
+      message: "success",
+      allocations,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retriving allocations",
+      error,
+    });
+  }
+};
+
 export const deleteAllAllocations = async (req, res) => {
   try {
     const allocations = await Allocation.deleteMany({});
