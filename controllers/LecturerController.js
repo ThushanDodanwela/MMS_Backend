@@ -70,7 +70,7 @@ export const updateLecturer = async (req, res) => {
         qualifications: qualifications,
       }
     );
-    console.log(lecturer);
+
     lecturer.save();
     res.status(200).json({
       message: "success",

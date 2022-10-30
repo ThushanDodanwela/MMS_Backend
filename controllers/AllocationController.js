@@ -54,3 +54,30 @@ export const newAllocation = async (req, res) => {
     });
   }
 };
+
+export const isAllocated = async (req, res) => {
+  const { moduleId, batch } = req.body;
+
+  try {
+    const allocation = await Allocation.findOne({
+      module: { _id: moduleId },
+      batch: batch,
+    });
+    if (allocation) {
+      res.status(200).json({
+        message: "ALLOCATED",
+        allocation,
+      });
+    } else {
+      res.status(200).json({
+        message: "NOT_ALLOCATED",
+        allocation,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error finding allocation",
+      error,
+    });
+  }
+};
