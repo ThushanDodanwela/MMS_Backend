@@ -23,7 +23,7 @@ app.use("/lecturer", LecturerRoutes);
 app.use("/module", ModuleRoutes);
 app.use("/allocations", AllocationRoutes);
 
-app.listen(9000, () => {
+app.listen(9050, () => {
   console.log("server started at port 9000");
 });
 
