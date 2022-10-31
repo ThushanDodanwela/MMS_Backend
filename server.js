@@ -24,7 +24,7 @@ app.use("/module", ModuleRoutes);
 app.use("/allocations", AllocationRoutes);
 
 app.listen(9050, () => {
-  console.log("server started at port 9000");
+  console.log("server started at port 9050");
 });
 
 mongoose

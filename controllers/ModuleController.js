@@ -51,3 +51,31 @@ export const newModule = async (req, res) => {
     });
   }
 };
+
+export const updateModule = async (req, res) => {
+  const { _id, moduleCode, moduleName, level, credits, semester } = req.body;
+
+  try {
+    const modules = await Module.findOneAndUpdate(
+      {
+        _id: _id,
+      },
+      {
+        moduleCode,
+        moduleName,
+        level,
+        credits,
+        semester,
+      }
+    );
+    res.status(200).json({
+      message: "success",
+      modules,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error updating new module",
+      error,
+    });
+  }
+};
