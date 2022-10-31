@@ -5,6 +5,7 @@ import {
   getAllocationsByLecturer,
   isAllocated,
   newAllocation,
+  updateAllocation,
 } from "../controllers/AllocationController.js";
 
 const router = express.Router();
@@ -12,6 +13,7 @@ const router = express.Router();
 router.post("/get-all", getAllAllocations);
 router.post("/get-allocations-by-lecturer", getAllocationsByLecturer);
 router.post("/new-allocation", newAllocation);
+router.post("/update-allocation", updateAllocation);
 router.post("/delete-all", deleteAllAllocations);
 router.post("/is-allocated", isAllocated);
 
