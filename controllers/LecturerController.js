@@ -13,8 +13,8 @@ export const getAllLecturers = async (req, res, next) => {
       message: "Error retriving lecturers",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const newLecturer = async (req, res, next) => {
@@ -37,8 +37,8 @@ export const newLecturer = async (req, res, next) => {
       message: "Error creating new lecturer",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const deleteAllLecturers = async (req, res, next) => {
@@ -52,8 +52,8 @@ export const deleteAllLecturers = async (req, res, next) => {
       message: "Error removing lecturers",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const updateLecturer = async (req, res, next) => {
@@ -84,6 +84,6 @@ export const updateLecturer = async (req, res, next) => {
       message: "error updating lecturer",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };

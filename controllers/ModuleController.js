@@ -12,8 +12,8 @@ export const getAllModules = async (req, res, next) => {
       message: "Error retriving modules",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const deleteAllModules = async (req, res, next) => {
@@ -27,8 +27,8 @@ export const deleteAllModules = async (req, res, next) => {
       message: "Error removing modules",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const newModule = async (req, res, next) => {
@@ -51,8 +51,8 @@ export const newModule = async (req, res, next) => {
       message: "Error creating new module",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
 
 export const updateModule = async (req, res, next) => {
@@ -80,6 +80,6 @@ export const updateModule = async (req, res, next) => {
       message: "Error updating new module",
       error,
     });
+    return next(error);
   }
-  return next(error);
 };
