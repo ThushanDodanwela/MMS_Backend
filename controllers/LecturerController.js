@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Lecturer from "../models/Lecturer.js";
 
-export const getAllLecturers = async (req, res) => {
+export const getAllLecturers = async (req, res, next) => {
   try {
     const lecturers = await Lecturer.find();
     res.status(200).json({
@@ -14,9 +14,10 @@ export const getAllLecturers = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const newLecturer = async (req, res) => {
+export const newLecturer = async (req, res, next) => {
   const { name, position, email, phoneNumber, qualifications } = req.body;
 
   try {
@@ -37,9 +38,10 @@ export const newLecturer = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const deleteAllLecturers = async (req, res) => {
+export const deleteAllLecturers = async (req, res, next) => {
   try {
     const lecturers = await Lecturer.deleteMany({});
     res.status(200).json({
@@ -51,9 +53,10 @@ export const deleteAllLecturers = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const updateLecturer = async (req, res) => {
+export const updateLecturer = async (req, res, next) => {
   const { _id, name, position, email, phoneNumber, qualifications } = req.body;
 
   try {
@@ -82,4 +85,5 @@ export const updateLecturer = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };

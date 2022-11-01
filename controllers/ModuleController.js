@@ -1,6 +1,6 @@
 import Module from "../models/Module.js";
 
-export const getAllModules = async (req, res) => {
+export const getAllModules = async (req, res, next) => {
   try {
     const modules = await Module.find();
     res.status(200).json({
@@ -13,9 +13,10 @@ export const getAllModules = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const deleteAllModules = async (req, res) => {
+export const deleteAllModules = async (req, res, next) => {
   try {
     const modules = await Module.deleteMany({});
     res.status(200).json({
@@ -27,9 +28,10 @@ export const deleteAllModules = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const newModule = async (req, res) => {
+export const newModule = async (req, res, next) => {
   const { moduleCode, moduleName, level, credits, semester } = req.body;
 
   try {
@@ -50,9 +52,10 @@ export const newModule = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
 
-export const updateModule = async (req, res) => {
+export const updateModule = async (req, res, next) => {
   const { _id, moduleCode, moduleName, level, credits, semester } = req.body;
 
   try {
@@ -78,4 +81,5 @@ export const updateModule = async (req, res) => {
       error,
     });
   }
+  return next(error);
 };
