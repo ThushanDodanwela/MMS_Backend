@@ -26,7 +26,12 @@ const LecturerSchema = new Schema({
   qualifications: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
+  },
+  password: {
+    type: String,
+    trim: true,
+    required: false,
   },
 });
 
