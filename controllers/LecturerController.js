@@ -1,14 +1,37 @@
 import mongoose from "mongoose";
 import Lecturer from "../models/Lecturer.js";
 import nodemailer from "nodemailer";
+
 export const getAllLecturers = async (req, res, next) => {
-  //TODO: remove password from the projection
   try {
-    const lecturers = await Lecturer.find();
+    const lecturers = await Lecturer.find({}, { password: 0 });
     res.status(200).json({
       message: "success",
       lecturers,
     });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retriving lecturers",
+      error,
+    });
+    return next(error);
+  }
+};
+
+export const isEmailExists = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const lecturer = await Lecturer.find({ email: email }, { password: 0 });
+    if (lecturer) {
+      res.status(200).json({
+        message: "Email already exists",
+      });
+    } else {
+      res.status(200).json({
+        message: "success",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Error retriving lecturers",
@@ -31,6 +54,7 @@ export const newLecturer = async (req, res, next) => {
       qualifications,
       password,
     });
+
     res.status(200).json({
       message: "success",
       lecturer,
