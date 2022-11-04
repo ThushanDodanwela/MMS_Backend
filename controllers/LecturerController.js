@@ -23,7 +23,7 @@ export const isEmailExists = async (req, res, next) => {
 
   try {
     const lecturer = await Lecturer.find({ email: email }, { password: 0 });
-    if (lecturer) {
+    if (lecturer.length > 0) {
       res.status(200).json({
         message: "Email already exists",
       });
