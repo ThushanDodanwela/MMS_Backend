@@ -89,13 +89,15 @@ export const isAllocated = async (req, res, next) => {
     });
     if (allocation) {
       res.status(200).json({
-        message: "ALLOCATED",
-        allocation,
+        message: "success",
+        isAllocated: "ALLOCATED",
+        allocation: allocation,
       });
     } else {
       res.status(200).json({
-        message: "NOT_ALLOCATED",
-        allocation,
+        message: "success",
+        isAllocated: "NOT_ALLOCATED",
+        allocation: allocation,
       });
     }
   } catch (error) {

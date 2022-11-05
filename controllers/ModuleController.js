@@ -16,6 +16,28 @@ export const getAllModules = async (req, res, next) => {
   }
 };
 
+export const isModuleExists = async (req, res, next) => {
+  const { moduleCode } = req.body;
+  try {
+    const module = await Module.find({ moduleCode: moduleCode });
+    if (module.length > 0) {
+      res.status(200).json({
+        message: "Module code already exists",
+      });
+    } else {
+      res.status(200).json({
+        message: "success",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error,
+    });
+    return next(error);
+  }
+};
+
 export const deleteAllModules = async (req, res, next) => {
   try {
     const modules = await Module.deleteMany({});
