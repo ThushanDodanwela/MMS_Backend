@@ -165,7 +165,7 @@ export const updateAllocationState = async (req, res, next) => {
         if (currentDate < newDate) {
           allocation.state.push(state);
         } else {
-          res.status(400).json({
+          res.status(200).json({
             message:
               "Operation Failed, New date is behind the previous state date.",
             allocation: allocation,
@@ -173,14 +173,14 @@ export const updateAllocationState = async (req, res, next) => {
           return;
         }
       } else {
-        res.status(400).json({
+        res.status(200).json({
           message: "Operation Failed, You cannot change the state order",
           allocation: allocation,
         });
         return;
       }
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "Operation Failed, Already existing state",
         allocation: allocation,
       });
