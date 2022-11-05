@@ -117,7 +117,7 @@ export const updateLecturer = async (req, res, next) => {
 export const sendOTP = async (req, res, next) => {
   const { email } = req.body;
   // find lecturer in the database
-  const lecturer = await Lecturer.findOneAndUpdate({
+  const lecturer = await Lecturer.findOne({
     email: email,
   });
 
