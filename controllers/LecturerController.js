@@ -242,6 +242,7 @@ export const login = async (req, res, next) => {
       res.status(200).json({
         message: "success",
         lecturerId: lecturer._id,
+        name: lecturer.name,
         position: lecturer.position,
       });
     } else {
