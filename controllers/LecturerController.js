@@ -136,9 +136,31 @@ export const sendOTP = async (req, res, next) => {
         from: "mms.dim.kln@gmail.com",
         to: "lasitheranga1@gmail.com", //TODO:replace email with lecturer email
         subject: "MMS - Password Reset",
-        html: `<h1>Hi ${
-          lecturer.name.split(" ")[0]
-        },</h1><h3>The OTP is:</h3><span>${OTP}</span>`,
+        html: `
+         <h3>Dear  ${lecturer.name.split(" ")[0]},</h3>
+        <p>To complete your email verification, please use the OTP below.</p>
+        <span
+          style="
+            background-color: rgb(18, 131, 80);
+            padding: 6px 10px 6px 10px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+          "
+          >${OTP}</span
+        >
+        <p>Thank you for using Module Management System.</p>
+        <p style="width: 30rem">
+          If you could not reset password using this email address, please contact
+          system admin. <br />
+          <br />
+
+          <span style="line-height: 1.5rem">
+            Thank You,<br />
+
+            <b>Team MMS</b>
+          </span>
+        </p>`,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {

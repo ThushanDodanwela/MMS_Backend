@@ -6,6 +6,7 @@ export const getAllAllocations = async (req, res, next) => {
     const allocations = await Allocation.find({}).populate(
       "lecturers.lecturer module secondExaminar demonstrators"
     );
+
     res.status(200).json({
       message: "success",
       allocations,
@@ -141,59 +142,67 @@ export const updateAllocationState = async (req, res, next) => {
     const allocation = await Allocation.findOne({
       _id: _id,
     });
-
-    // check whether it already exists
-    const isAllocated = allocation.state.find(
-      (current) => current.name === state.name
-    );
-    if (!isAllocated) {
-      //check whether the order is correct
-      const currentStateIndex = STATES.findIndex((current) => {
-        return current === allocation.state[allocation.state.length - 1].name;
-      });
-      //if its the last element no more updates
-      if (
-        STATES.length - 1 !== currentStateIndex &&
-        STATES[currentStateIndex + 1] === state.name
-      ) {
-        //check dates wheter new date is ahead
-        const currentDate = new Date(
-          allocation.state[allocation.state.length - 1].date
-        );
-        const newDate = new Date(state.date);
-        // console.log(currentDate, newDate);
-        if (currentDate < newDate) {
-          allocation.state.push(state);
+    if (allocation) {
+      // check whether it already exists
+      const isAllocated = allocation.state.find(
+        (current) => current.name === state.name
+      );
+      if (!isAllocated) {
+        //check whether the order is correct
+        const currentStateIndex = STATES.findIndex((current) => {
+          return current === allocation.state[allocation.state.length - 1].name;
+        });
+        //if its the last element no more updates
+        if (
+          STATES.length - 1 !== currentStateIndex &&
+          STATES[currentStateIndex + 1] === state.name
+        ) {
+          //check dates wheter new date is ahead
+          const currentDate = new Date(
+            allocation.state[allocation.state.length - 1].date
+          );
+          const newDate = new Date(state.date);
+          // console.log(currentDate, newDate);
+          if (currentDate < newDate) {
+            allocation.state.push(state);
+          } else {
+            res.status(400).json({
+              message:
+                "Operation Failed, New date is behind the previous state date.",
+              allocation: allocation,
+            });
+            return;
+          }
         } else {
           res.status(400).json({
-            message:
-              "Operation Failed, New date is behind the previous state date.",
+            message: "Operation Failed, You cannot change the state order",
             allocation: allocation,
           });
           return;
         }
       } else {
         res.status(400).json({
-          message: "Operation Failed, You cannot change the state order",
+          message: "Operation Failed, Already existing state",
           allocation: allocation,
         });
         return;
       }
+      allocation.save();
+      res.status(200).json({
+        message: "success",
+        allocation,
+      });
     } else {
+      //no allocation found for given id
       res.status(400).json({
-        message: "Operation Failed, Already existing state",
+        message: "Allocation not found",
         allocation: allocation,
       });
       return;
     }
-    allocation.save();
-    res.status(400).json({
-      message: "success",
-      allocation,
-    });
   } catch (error) {
     res.status(500).json({
-      message: "Error creating new allocation",
+      message: "Error updating allocation state",
       error,
     });
     return next(error);
