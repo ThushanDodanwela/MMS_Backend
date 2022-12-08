@@ -1,0 +1,3 @@
+DB = mongodb+srv://admin:admin@mms.ks5ywvz.mongodb.net/MMS?retryWrites=true&w=majority
+USER = mms.dim.kln@gmail.com
+PASSWORD = gqikpkwktknpalod
