@@ -21,7 +21,7 @@ const LecturerSchema = new Schema({
   phoneNumber: {
     type: String,
     trim: true,
-    required: true,
+    required: false,
   },
   qualifications: {
     type: String,

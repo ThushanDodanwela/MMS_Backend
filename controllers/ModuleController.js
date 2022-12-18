@@ -2,7 +2,7 @@ import Module from "../models/Module.js";
 
 export const getAllModules = async (req, res, next) => {
   try {
-    const modules = await Module.find();
+    const modules = await Module.find({ state: "exams" });
     res.status(200).json({
       message: "success",
       modules,
