@@ -64,7 +64,7 @@ export const newAllocation = async (req, res, next) => {
       module,
       state,
       batch,
-      secondExaminar,
+      ...(secondExaminar.length > 0 && { secondExaminar }),
       demonstrators,
     });
     res.status(200).json({
@@ -120,7 +120,11 @@ export const updateAllocation = async (req, res, next) => {
     allocation.lecturers = lecturers;
     allocation.module = module;
     allocation.batch = batch;
-    allocation.secondExaminar = secondExaminar;
+    if (secondExaminar.length > 0) {
+      allocation.secondExaminar = secondExaminar;
+    } else {
+      allocation.secondExaminar = null;
+    }
     allocation.demonstrators = demonstrators;
     allocation.save();
     res.status(200).json({
